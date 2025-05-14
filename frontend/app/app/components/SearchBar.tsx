@@ -11,9 +11,9 @@ export const Searchbar = ({
   searchInput,
 }: SearchbarProps) => {
   return (
-    <div className="flex flex-row w-8/10 h-16 rounded-2xl p-4 bg-[#899878] m-4 justify-center">
+    <div className="flex flex-row w-8/10 h-16 rounded-2xl p-4 bg-[var(--color-secondary-green)] m-4 justify-center">
       <input
-        className="g-gray-50 border bg-white border-gray-300 text-gray-900 text-sm rounded-2xl focus:border-[#E4E6C3] w-full p-2.5 "
+        className="g-gray-50 border bg-white border-gray-300 text-gray-900 text-sm rounded-2xl focus:border-[var(--color-primary-green)] w-full p-2.5 "
         type="text"
         id="search"
         placeholder="Search for a product..."
