@@ -1,30 +1,25 @@
+"use client"
 import React from "react"
 
-interface SearchBarProps {
-  onSearch: (query: string) => void;
-  placeholder?: string;
+interface SearchbarProps {
+  handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  searchInput: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeholder = "Search..." }) => {
-
-const [query, setQuery] = React.useState('')
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && onSearch) {
-      onSearch(query)
-    }
-  }
-
+export const Searchbar = ({
+  handleInput,
+  searchInput,
+}: SearchbarProps) => {
   return (
-    <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-full px-4 py-2 w-full max-w-md">
+    <div className="flex flex-row w-8/10 h-16 rounded-2xl p-4 bg-[#899878] m-4 justify-center">
       <input
+        className="g-gray-50 border bg-white border-gray-300 text-gray-900 text-sm rounded-2xl focus:border-[#E4E6C3] w-full p-2.5 "
         type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        className="flex-grow bg-transparent focus:outline-none text-gray-700 dark:text-gray-200 placeholder-gray-500"
+        id="search"
+        placeholder="Search for a product..."
+        onChange={handleInput}
+        value={searchInput}
       />
     </div>
-  )
-}
+  );
+};

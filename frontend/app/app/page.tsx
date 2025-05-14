@@ -1,14 +1,14 @@
-
+import { HeroBanner } from "./components/HeroBanner";
 import NavBar from "./components/NavBar";
-import { SearchBar } from "./components/SearchBar";
+import { SearchComponent } from "./components/SeachComponent";
 
 export default function Home() {
+  
   return (
     <>
       <NavBar/>
-      <SearchBar onSearch={function (query: string): void {
-        throw new Error("Function not implemented.");
-      } }/>
+      <HeroBanner/>
+      <SearchComponent/>
     </>
-  );
+  )
 }
