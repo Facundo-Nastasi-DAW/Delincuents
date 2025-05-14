@@ -1,8 +1,26 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+:root {  /* Colors */
+  --color-background:      #F7F7F2;
+  --color-primary-green:   #E4E6C3;
+  --color-secondary-green: #899878;
+  --color-detail-yellow:   #FFF195;
+  --color-alert-red:       #D35F65;
+
+  --color-text: #333;
+
+  /* Fonts */
+  --font-title:   'Abril Fatface', serif;
+  --font-body:    'Comfortaa', sans-serif;
+  --font-details: 'Montserrat', sans-serif;
+
+  /* Text contrast fallback */
 }
 
 @theme inline {
