@@ -1,0 +1,17 @@
+{
+    "pp": {
+        "DB_HOST": "localhost",
+        "DB_PORT": "3306",
+        "DB_NAME": "delincuents_pp",
+        "DB_USER": "root",
+        "DB_PASSWORD": ""
+    },
+
+    "prod": {
+        "DB_HOST": "prod.db.server",
+        "DB_PORT": "3306",
+        "DB_NAME": "delincuents_prod",
+        "DB_USER": "admin",
+        "DB_PASSWORD": "mirra23"
+    }
+}
