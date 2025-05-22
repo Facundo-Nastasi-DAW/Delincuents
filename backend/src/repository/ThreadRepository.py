@@ -1,4 +1,4 @@
 import DelincuentsRepository
 
-class ThreadRepository(DelincuentsRepository):
+class ThreadRepository(DelincuentsRepository.DelincuentsRepository):
     pass
