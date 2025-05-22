@@ -1,4 +1,4 @@
 import DelincuentsRepository
 
-class PlantRepository(DelincuentsRepository):
+class PlantRepository(DelincuentsRepository.DelincuentsRepository):
     pass
