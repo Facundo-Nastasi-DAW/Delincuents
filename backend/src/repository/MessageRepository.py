@@ -1,4 +1,4 @@
 import DelincuentsRepository
 
-class MessageRepository(DelincuentsRepository):
+class MessageRepository(DelincuentsRepository.DelincuentsRepository):
     pass
