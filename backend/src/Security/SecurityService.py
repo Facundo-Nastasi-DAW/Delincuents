@@ -21,7 +21,7 @@ class SecurityService(object):
         if expires_delta:
             expire = datetime.now(timezone.utc) + expires_delta
         else:
-            expire = datetime.now(timezone.utc) + timedelta(minutes=120)
+            expire = datetime.now(timezone.utc) + timedelta(minutes=15)
         to_encode.update({"exp": expire})
         encoded_jwt = jwt.encode(to_encode, self.SECRET_KEY, algorithm=self.ALGORITHM)
 
@@ -45,7 +45,7 @@ class SecurityService(object):
                 headers={"WWW-Authenticate": "Bearer"},
             )
     
-    def pwdMatches(self, attempt:str, stored:str):
+    def encrypt(self, attempt:str):
         try:
             attempt_bytes = attempt.encode('utf-8')
 
@@ -57,8 +57,6 @@ class SecurityService(object):
                 length = self.LENGTH 
             )
             
-            derived_attempt = deriver.derive(attempt_bytes).hex()
-            
-            return derived_attempt == stored
+            return deriver.derive(attempt_bytes).hex()
         except Exception as e:
             raise e

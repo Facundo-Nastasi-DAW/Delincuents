@@ -16,6 +16,13 @@ def register(request: RegisterRequest.RegisterRequest):
             detail="Username already exists"
         )
     
+    encryptedPwd = SecurityService.encrypy(request.PASSWORD)
 
-    userRepository.register(request.USERNAME, request.PASSWORD, request.PFP,  request.NAME)
+    userRepository.register(
+        request.USERNAME,
+        encryptedPwd,
+        request.PFP,
+        request.NAME
+    )
+
     # return login(request.USERNAME, request.PASSWORD) TODO descomentar cuando este hecho el login
