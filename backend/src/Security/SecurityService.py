@@ -30,7 +30,7 @@ class SecurityService(object):
     def verify_token(self, token: str = Depends(OAUTH2_SCHEME)):
         try:
             payload = jwt.decode(token, self.SECRET_KEY, algorithms=[self.ALGORITHM])
-            userId = int(payload.get("sub"))
+            userId = int(payload.get("id"))
             if userId is None:
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED,
