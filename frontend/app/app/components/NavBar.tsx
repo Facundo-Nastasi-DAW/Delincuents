@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Login Button */}
-        <Link href='/login' className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700'>
+        <Link href='/login' className='px-4 py-2 bg-[#899878] text-white rounded-2xl hover:bg-[#E4E6C3] hover:text-black'>
           Iniciar Sesión
         </Link>
       </div>
