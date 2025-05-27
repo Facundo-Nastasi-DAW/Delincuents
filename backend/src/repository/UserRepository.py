@@ -15,3 +15,27 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
         self.cursor.execute(sql, (username, pwd, pfp, name))
         self.disconnect()
         return
+    
+    def getPassword(self, username):
+        self.connect()
+        sql = "Select password from user where username = %s;"
+        self.cursor.execute(sql, (username))
+        result = self.cursor.fetchone()
+        self.disconnect()
+        return result
+    
+    def getId(self, username):
+        self.connect()
+        sql = "Select id from user where username = %s;"
+        self.cursor.execute(sql, (username))
+        result = self.cursor.fetchone()
+        self.disconnect()
+        return result
+    
+    def getUserById(self, id):
+        self.connect()
+        sql = "Select * from user where id = %s;"
+        self.cursor.execute(sql, (id))
+        result = self.cursor.fetchall()
+        self.disconnect()
+        return result
