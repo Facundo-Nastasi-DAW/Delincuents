@@ -1,11 +1,14 @@
 from fastapi import FastAPI, Request, Depends, HTTPException, status
-from Models import RegisterRequest, LoginRequest
-from Repository import UserRepository
+from Models import RegisterRequest, LoginRequest, MessageRequest
+from Repository import UserRepository, MessageRepository, PlantRepository
 from Security.SecurityService import SecurityService
+from datetime import datetime
 
 app = FastAPI()
 
 userRepository = UserRepository.UserRepository
+messageRepository = MessageRepository.MessageRepository
+plantRepository = PlantRepository.PlantRepository
 
 #End-point to registry
 @app.post('/register')
@@ -54,3 +57,31 @@ def login(request: LoginRequest.LoginRequest):
     }
 
     return user
+
+#End-point to post a message
+@app.post('/post-message')
+def postMessage(request: MessageRequest.MessageRequest):
+    cratedAt = datetime.now().strftime("%d/%m/%Y %H:%M")
+    try:
+        messageRepository.postMessage(
+            request.BODY,
+            request.LIKES,
+            request.DISLIKES,
+            cratedAt,
+            request.WRITER,
+            request.PARENT_THREAD,
+            request.CHILD_THREAD,
+            request.PLANT
+        )
+    except Exception as e:
+        raise e
+    
+#End-point to get all messages from a thread
+@app.get('/get-messages/{plantId}')
+def getMessages(plantId: int):
+    if not plantRepository.existsPlant(plantId):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Plant doesn't exist"
+        )
+    return messageRepository.getMessagesFromPlant(plantId)

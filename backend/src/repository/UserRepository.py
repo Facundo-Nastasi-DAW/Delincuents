@@ -3,7 +3,7 @@ import DelincuentsRepository
 class UserRepository(DelincuentsRepository.DelincuentsRepository):
     def existsUsername(self, username):
         self.connect()
-        sql = "Select 1 from user where username = %s;"
+        sql = "SELECT 1 FROM user WHERE username = %s;"
         self.cursor.execute(sql, (username))
         result = self.cursor.fetchone()
         self.disconnect()
@@ -18,7 +18,7 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     
     def getPassword(self, username):
         self.connect()
-        sql = "Select password from user where username = %s;"
+        sql = "SELECT password FROM user WHERE username = %s;"
         self.cursor.execute(sql, (username))
         result = self.cursor.fetchone()
         self.disconnect()
@@ -26,7 +26,7 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     
     def getId(self, username):
         self.connect()
-        sql = "Select id from user where username = %s;"
+        sql = "SELECT id FROM user WHERE username = %s;"
         self.cursor.execute(sql, (username))
         result = self.cursor.fetchone()
         self.disconnect()
@@ -34,7 +34,7 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     
     def getUserById(self, id):
         self.connect()
-        sql = "Select * from user where id = %s;"
+        sql = "SELECT * FROM user WHERE id = %s;"
         self.cursor.execute(sql, (id))
         result = self.cursor.fetchall()
         self.disconnect()
