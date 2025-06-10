@@ -45,7 +45,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
     const data = await res.json();
 
-    // Guardar token y username en cookies
     Cookies.set("token", data.token, { path: "/" });
     Cookies.set("username", data.name || data.username, { path: "/" });
 

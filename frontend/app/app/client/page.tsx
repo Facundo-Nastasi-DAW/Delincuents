@@ -16,6 +16,7 @@ export interface Plant {
     default_image?: {
         regular_url?: string;
     };
+    id: string
 }
 
 export interface Plants {

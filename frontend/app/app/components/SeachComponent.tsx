@@ -10,6 +10,7 @@ export interface Plant {
   default_image?: {
     regular_url?: string;
   };
+  id: string;
 }
 
 interface SearchComponentProps {
@@ -40,6 +41,7 @@ export const SearchComponent = ({ Plants }: SearchComponentProps) => {
           {filteredPlants.length > 0 ? (
             filteredPlants.map((plant, index) => (
               <PlantCard
+                id={plant.id}
                 key={index}
                 name={plant.common_name}
                 image={plant.default_image?.regular_url || "https://via.placeholder.com/150"}

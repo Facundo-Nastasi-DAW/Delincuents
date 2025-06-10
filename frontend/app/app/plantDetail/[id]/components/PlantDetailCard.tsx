@@ -3,6 +3,7 @@ import { PlantInfo } from "./PlantInfo";
 import { PlantStats } from "./PlantStats";
 
 interface Props {
+  id: string;
   name: string;
   description: string;
   image: string;
