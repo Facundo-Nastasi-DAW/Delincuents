@@ -50,5 +50,11 @@ useEffect(() => {
       <FaqsComponent />
       <Footer />
     </div>
+    <>
+      <NavBar/>
+      <HeroBanner/>
+      <SearchComponent/>
+      <Footer/>
+    </>
   )
 }

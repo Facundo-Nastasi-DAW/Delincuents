@@ -6,7 +6,7 @@ export const HeroBanner = () => {
                 alt="Hero Banner"
                 className="w-full h-full object-cover opacity-50"
             />
-            <h2 className="absolute inset-0 font-extrabold text-5xl text-white text-center vertical-align-center content-center "> Lorem ipsum dolor sit amet</h2>
+            <h2 className="absolute inset-0 font-extrabold text-5xl text-[var(--color-background)] text-center vertical-align-center content-center "> Lorem ipsum dolor sit amet</h2>
             </div>
     );
 }
