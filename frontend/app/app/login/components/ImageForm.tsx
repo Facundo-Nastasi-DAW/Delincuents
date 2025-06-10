@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from "react";
 
 const quotes = [
-  "Las plantas también hablan, solo hay que escucharlas.",
-  "Cuidar una planta es cuidar un pedacito del planeta.",
-  "El verde es el color de la vida.",
-  "Quien planta un jardín, planta felicidad.",
-  "Cada hoja guarda una historia que aún no se ha contado.",
+  "Plants also speak; you just have to listen.",
+  "Taking care of a plant is taking care of a piece of the planet.",
+  "Green is the color of life.",
+  "Who plants a garden, plants happiness.",
+  "Each leaf holds a story yet to be told.",
 ];
+
 
 export const ImageForm: React.FC = () => {
   const [quote, setQuote] = useState("");
