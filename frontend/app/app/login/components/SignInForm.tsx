@@ -8,7 +8,7 @@ interface SignUpFormSectionProps {
 export const SignUpForm: React.FC<SignUpFormSectionProps> = ({ onSwitch }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [pfp, setPfp] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
@@ -26,12 +26,14 @@ export const SignUpForm: React.FC<SignUpFormSectionProps> = ({ onSwitch }) => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
         },
+        mode: "cors",
         body: JSON.stringify({
-          USERNAME: email,
+          USERNAME: username,
+          EMAIL: email,
           PASSWORD: password,
           NAME: name,
-          PFP: pfp,
         }),
       });
 
@@ -53,21 +55,21 @@ export const SignUpForm: React.FC<SignUpFormSectionProps> = ({ onSwitch }) => {
   return (
     <div className="md:w-1/2 flex flex-col justify-center items-center px-10 py-16">
       <form onSubmit={handleSubmit} className="bg-white w-full max-w-sm p-6 rounded-xl shadow-md">
-        <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
+        <input
+          type="text"
+          className="w-full mb-4 p-2.5 border border-gray-300 rounded-xl"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+          required
+        />
+
+        <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
         <input
           type="text"
           className="w-full mb-4 p-2.5 border border-gray-300 rounded-xl"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
-        />
-
-        <label className="block text-sm font-medium text-gray-700 mb-1">Foto de perfil (URL)</label>
-        <input
-          type="text"
-          className="w-full mb-4 p-2.5 border border-gray-300 rounded-xl"
-          value={pfp}
-          onChange={(e) => setPfp(e.target.value)}
         />
 
         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
