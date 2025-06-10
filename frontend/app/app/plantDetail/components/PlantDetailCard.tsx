@@ -7,9 +7,9 @@ interface Props {
   description: string;
   image: string;
   rating: number;
-  water: number;
-  sun: number;
-  temp: number;
+  water: string;
+  sun: string;
+  temp: string;
 }
 
 export const PlantDetailCard: React.FC<Props> = (props) => (

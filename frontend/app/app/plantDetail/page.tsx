@@ -11,9 +11,9 @@ export default function PlantDetailPage() {
     description: "random plant info...",
     image: "/img/monstera.jpg",
     rating: 5,
-    water: 0,
-    sun: 0,
-    temp: 0,
+    water: "This plant requires regular watering, especially during hot summer months. Ensure the soil stays moist but never soggy.",
+    sun: "Prefers bright, indirect sunlight. Avoid exposing it to harsh midday rays which may scorch the leaves.",
+    temp: "Thrives in temperatures between 18°C and 24°C. Protect it from cold drafts and sudden temperature changes.",
   };
 
   const related = [
