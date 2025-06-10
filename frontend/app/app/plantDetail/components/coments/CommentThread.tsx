@@ -20,28 +20,37 @@ export const CommentThread: React.FC<Props> = ({ comment, onReply }) => {
   const [showReply, setShowReply] = useState(false);
 
   return (
-    <div className="border-l pl-4 ml-2 space-y-2">
-      <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-        <p className="text-gray-800 dark:text-gray-100">{comment.content}</p>
-        <div className="flex items-center space-x-4 text-sm mt-2">
-          <button className="text-green-600 flex items-center gap-1">
-            <FaThumbsUp /> {comment.likes}
+    <div className="mt-10 max-w-4xl mx-auto border-l-2 border-gray-300 dark:border-gray-700 pl-4 ml-2 space-y-4">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+        <p className="text-base sm:text-lg text-gray-800 dark:text-gray-100 leading-relaxed">
+          {comment.content}
+        </p>
+        <div className="flex items-center space-x-6 text-base mt-4">
+          <button className="text-green-600 flex items-center gap-2 hover:underline">
+            <FaThumbsUp className="text-xl" /> {comment.likes}
           </button>
-          <button className="text-red-600 flex items-center gap-1">
-            <FaThumbsDown /> {comment.dislikes}
+          <button className="text-red-600 flex items-center gap-2 hover:underline">
+            <FaThumbsDown className="text-xl" /> {comment.dislikes}
           </button>
-          <button onClick={() => setShowReply(!showReply)} className="text-blue-600 underline">
-            Respon
+          <button
+            onClick={() => setShowReply(!showReply)}
+            className="text-blue-600 font-medium hover:underline"
+          >
+            {showReply ? "Cancel·lar" : "Respon"}
           </button>
         </div>
         {showReply && (
-          <div className="mt-2">
-            <NewCommentInput onSubmit={(text) => onReply(text, comment.id)} />
+          <div className="mt-4">
+            <NewCommentInput
+              onSubmit={(text) => {
+                onReply(text, comment.id);
+                setShowReply(false);
+              }}
+            />
           </div>
         )}
       </div>
 
-      {/* Renderizar hijos recursivamente */}
       {comment.children?.map((child) => (
         <CommentThread key={child.id} comment={child} onReply={onReply} />
       ))}

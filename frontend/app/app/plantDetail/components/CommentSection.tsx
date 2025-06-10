@@ -90,7 +90,7 @@ export const CommentSection: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4">
+    <div className="w-4/5 flex flex-col p-4">
       <h3 className="text-xl font-semibold mb-4">Comentaris</h3>
       {comments.length === 0 ? (
         <div className="text-center">

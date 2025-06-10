@@ -15,12 +15,18 @@ export const LikeDislike: React.FC<Props> = ({
   onDislike,
 }) => {
   return (
-    <div className="flex items-center gap-4 text-sm text-gray-700 dark:text-white">
-      <button onClick={onLike} className="flex items-center gap-1 hover:text-green-600">
-        <FaThumbsUp /> {likes}
+    <div className="flex items-center gap-6 text-base sm:text-lg text-gray-700 dark:text-white">
+      <button
+        onClick={onLike}
+        className="flex items-center gap-2 hover:text-green-600 transition-colors"
+      >
+        <FaThumbsUp className="text-xl" /> {likes}
       </button>
-      <button onClick={onDislike} className="flex items-center gap-1 hover:text-red-600">
-        <FaThumbsDown /> {dislikes}
+      <button
+        onClick={onDislike}
+        className="flex items-center gap-2 hover:text-red-600 transition-colors"
+      >
+        <FaThumbsDown className="text-xl" /> {dislikes}
       </button>
     </div>
   );
