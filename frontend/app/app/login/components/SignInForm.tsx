@@ -8,7 +8,7 @@ interface SignUpFormSectionProps {
 export const SignUpForm: React.FC<SignUpFormSectionProps> = ({ onSwitch }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [pfp, setPfp] = useState(""); // puede ser una URL o base64 si tu backend lo admite
+  const [pfp, setPfp] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
