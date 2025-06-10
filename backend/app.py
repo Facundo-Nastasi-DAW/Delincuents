@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, Depends, HTTPException, status
-from Models import RegisterRequest, LoginRequest
-from Repository import UserRepository
-from Security.SecurityService import SecurityService
+from src.Models import RegisterRequest, LoginRequest
+from src.Repository import UserRepository
+from src.Security.SecurityService import SecurityService
 
 app = FastAPI()
 
