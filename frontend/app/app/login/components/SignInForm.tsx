@@ -20,28 +20,27 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setError("Passwords do not match.");
     return;
   }
+    try {
+      const res = await fetch("http://localhost:8000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify({
+          USERNAME: username,
+          EMAIL: email,
+          PASSWORD: password,
+          NAME: name,
+        }),
+      });
 
-  try {
-    const res = await fetch("http://localhost:8000/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify({
-        USERNAME: username,
-        EMAIL: email,
-        PASSWORD: password,
-        NAME: name,
-      }),
-    });
-
-    if (!res.ok) {
-      const data = await res.json();
-      setError(data.detail || "Error al registrar.");
-      return;
-    }
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.detail || "Error al registrar.");
+        return;
+      }
 
     const data = await res.json();
 
