@@ -1,4 +1,4 @@
-import DelincuentsRepository
+from src.Repository import DelincuentsRepository
 
 class UserRepository(DelincuentsRepository.DelincuentsRepository):
     def existsUsername(self, username):

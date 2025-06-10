@@ -1,4 +1,4 @@
-import DelincuentsModel
+from src.Models import DelincuentsModel
 
 class RegisterRequest(DelincuentsModel.DelincuentsModel):
     USERNAME: str
