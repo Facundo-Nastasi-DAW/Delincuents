@@ -2,9 +2,9 @@ import { JSX } from "react";
 import { FaTint, FaSun, FaThermometerHalf } from "react-icons/fa";
 
 interface StatsProps {
-  water: number;
-  sun: number;
-  temp: number;
+  water: string;
+  sun: string;
+  temp: string;
 }
 
 export const PlantStats: React.FC<StatsProps> = ({ water, sun, temp }) => (
@@ -15,7 +15,7 @@ export const PlantStats: React.FC<StatsProps> = ({ water, sun, temp }) => (
   </div>
 );
 
-const Stat: React.FC<{ icon: JSX.Element; label: string; value: number }> = ({ icon, label, value }) => (
+const Stat: React.FC<{ icon: JSX.Element; label: string; value: string }> = ({ icon, label, value }) => (
   <div>
     <div className="mx-auto">{icon}</div>
     <div className="text-sm">{label}</div>
