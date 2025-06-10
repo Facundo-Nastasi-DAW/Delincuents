@@ -1,9 +1,17 @@
 from fastapi import FastAPI, Request, Depends, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from src.Models import RegisterRequest, LoginRequest
 from src.Repository import UserRepository
 from src.Security.SecurityService import SecurityService
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 userRepository = UserRepository.UserRepository
 
@@ -20,11 +28,10 @@ def register(request: RegisterRequest.RegisterRequest):
 
     userRepository.register(
         request.USERNAME,
+        request.EMAIL,
         encryptedPwd,
-        request.PFP,
         request.NAME
     )
-
     loginRequest = LoginRequest(USERNAME=request.USERNAME, PASSWORD=request.PASSWORD)
     return login(loginRequest)
 

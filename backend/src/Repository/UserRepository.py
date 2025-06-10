@@ -9,10 +9,10 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
         self.disconnect()
         return result
 
-    def register(self, username, pwd, pfp, name):
+    def register(self, username, email, pwd, name):
         self.connect()
-        sql = "INSERT INTO User (username, password, profile_picture, name) VALUES (%s, %s, %s, %s);"
-        self.cursor.execute(sql, (username, pwd, pfp, name))
+        sql = "INSERT INTO User (username, email, password, name) VALUES (%s, %s, %s, %s);"
+        self.cursor.execute(sql, (username, email, pwd, name))
         self.disconnect()
         return
     
