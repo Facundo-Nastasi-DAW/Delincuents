@@ -10,7 +10,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
 
   return (
     <div
-      className={`w-full rounded-xl shadow p-4 mb-4 bg-[#f7f7e8] transition-all ${
+      className={`w-full rounded-xl shadow-md p-6 mb-6 bg-[#f7f7e8] transition-all duration-300 ${
         isOpen ? "shadow-inner" : ""
       }`}
     >
@@ -18,11 +18,15 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <strong className="text-md">{question}</strong>
-        <span className="text-xl">{isOpen ? "↑" : "↓"}</span>
+        <strong className="text-xl sm:text-2xl text-[var(--color-text)]">
+          {question}
+        </strong>
+        <span className="text-2xl">{isOpen ? "↑" : "↓"}</span>
       </div>
       {isOpen && (
-        <p className="mt-3 text-sm text-gray-700">{answer}</p>
+        <p className="mt-4 text-base sm:text-lg text-gray-800 leading-relaxed">
+          {answer}
+        </p>
       )}
     </div>
   );

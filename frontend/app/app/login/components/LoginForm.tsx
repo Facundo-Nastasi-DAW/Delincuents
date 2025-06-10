@@ -6,18 +6,40 @@ interface LoginFormSectionProps {
   onSwitch: () => void;
 }
 
-
-
 export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (onSubmit) onSubmit(email, password);
-    else console.log({ email, password });
+    try {
+      const res = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        credentials: "include", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          USERNAME: email,
+          PASSWORD: password,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.detail || "Login failed");
+        return;
+      }
+
+      const data = await res.json();
+      alert(`Bienvenido/a, ${data.name}!`);
+      
+    } catch (err) {
+      console.error(err);
+      setError("Ha ocurrido un error al iniciar sesión.");
+    }
   };
-  
 
   return (
     <div className="md:w-1/2 flex flex-col justify-center items-center px-10 py-16">
@@ -43,6 +65,8 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
           required
         />
 
+        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+
         <button
           type="submit"
           className="w-full bg-black text-white py-2 rounded-xl hover:opacity-90 transition"
@@ -57,7 +81,8 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
 
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-700">You don't have an account?</p>
-        <button onClick={onSwitch} className="px-4 py-2 bg-[#899878] text-white rounded-2xl hover:bg-[#E4E6C3] hover:text-black">          Sign Up
+        <button onClick={onSwitch} className="px-4 py-2 bg-[#899878] text-white rounded-2xl hover:bg-[#E4E6C3] hover:text-black">
+          Sign Up
         </button>
       </div>
     </div>
