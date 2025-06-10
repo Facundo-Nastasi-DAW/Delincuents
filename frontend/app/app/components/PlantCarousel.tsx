@@ -1,43 +1,41 @@
-// PlantCarousel.jsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import PlantCard from "./PlantCard";
-// Import getPlants from its module (update the path as needed)
 import { getPlants } from "../api/apiPlants";
 
 interface Plant {
-    common_name: string;
-    isFav: boolean;
-    default_image?: {
-        regular_url?: string;
-    };
+  common_name: string;
+  isFav: boolean;
+  default_image?: {
+    regular_url?: string;
+  };
 }
+
 interface Props {
-    Plants: Plant[];
+  Plants: Plant[];
 }
+
 type ScrollDirection = "left" | "right";
 
 const PlantCarousel = ({ Plants }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  
-
-const scroll = (direction: ScrollDirection) => {
+  const scroll = (direction: ScrollDirection) => {
     if (containerRef.current) {
-        const scrollAmount = 250;
-        containerRef.current.scrollBy({
-            left: direction === "left" ? -scrollAmount : scrollAmount,
-            behavior: "smooth",
-        });
+      const scrollAmount = 300;
+      containerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
     }
-};
-console.log(Plants);
+  };
 
   return (
-    <div className="relative w-full py-4">
+    <div className="mx-auto relative w-4/5 py-6">
       {/* Flecha Izquierda */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[#f7f7e8] rounded-full shadow p-2 text-xl"
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-[#f7f7e8] rounded-full shadow-lg p-3 text-2xl hover:scale-105 transition-transform"
+        aria-label="Scroll Left"
       >
         ←
       </button>
@@ -45,7 +43,7 @@ console.log(Plants);
       {/* Contenedor de tarjetas */}
       <div
         ref={containerRef}
-        className="flex gap-4 overflow-x-auto px-12 scroll-smooth no-scrollbar"
+        className="flex gap-6 overflow-x-auto px-6 sm:px-16 scroll-smooth no-scrollbar"
       >
         {Plants.map((plant, index) => (
           <PlantCard
@@ -60,7 +58,8 @@ console.log(Plants);
       {/* Flecha Derecha */}
       <button
         onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[#f7f7e8] rounded-full shadow p-2 text-xl"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-[#f7f7e8] rounded-full shadow-lg p-3 text-2xl hover:scale-105 transition-transform"
+        aria-label="Scroll Right"
       >
         →
       </button>

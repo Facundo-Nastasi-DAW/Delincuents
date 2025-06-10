@@ -37,19 +37,16 @@ const fetchPlants = async () => {
 useEffect(() => {
   fetchPlants();
 }, []);
-
-console.log("Helena", plants);
   return (
     <div className="bg-[#f5f5ef] min-h-screen flex flex-col">
       <NavBar />
-
-      <main className="flex flex-col items-center p-4">
-        <HeroClient userName="Helena" />
-          <SearchComponent Plants={plants} />
-      </main>
-
-      <Footer />
+        <main className="flex flex-col items-center p-4">
+          <HeroClient userName="Helena" />
+            <SearchComponent Plants={plants} />
+        </main>
+        <Footer />
     </div>
+      
   );
 };
 

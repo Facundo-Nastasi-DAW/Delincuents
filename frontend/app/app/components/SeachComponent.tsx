@@ -1,4 +1,3 @@
-// SearchComponent.tsx
 "use client";
 import { useState } from "react";
 import { Searchbar } from "./SearchBar";
@@ -6,11 +5,11 @@ import PlantCard from "./PlantCard";
 import PlantCarousel from "./PlantCarousel";
 
 export interface Plant {
-    common_name: string;
-    isFav: boolean;
-    default_image?: {
-        regular_url?: string;
-    };
+  common_name: string;
+  isFav: boolean;
+  default_image?: {
+    regular_url?: string;
+  };
 }
 
 interface SearchComponentProps {
@@ -29,28 +28,26 @@ export const SearchComponent = ({ Plants }: SearchComponentProps) => {
   );
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center w-full px-4 sm:px-8 py-6">
       <Searchbar handleInput={handleInput} searchInput={searchInput} />
 
       {searchInput.trim() === "" ? (
-        // Si no hay texto, mostramos el carrusel
-        <div className="w-full">
+        <div className="w-full mt-6">
           <PlantCarousel Plants={Plants} />
         </div>
       ) : (
-        // Si hay texto, mostramos resultados filtrados
-        <div className="flex flex-wrap gap-4 justify-center mt-4">
+        <div className="flex flex-wrap gap-6 justify-center mt-8 px-4 sm:px-12">
           {filteredPlants.length > 0 ? (
             filteredPlants.map((plant, index) => (
               <PlantCard
                 key={index}
                 name={plant.common_name}
-                image={plant.default_image?.regular_url || "https://via.placeholder.com/150"}   
+                image={plant.default_image?.regular_url || "https://via.placeholder.com/150"}
                 isFav={plant.isFav}
               />
             ))
           ) : (
-            <p className="text-gray-500 mt-4">No s'han trobat plantes.</p>
+            <p className="text-gray-500 text-lg mt-6 text-center">No s'han trobat plantes.</p>
           )}
         </div>
       )}

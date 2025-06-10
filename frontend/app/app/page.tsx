@@ -43,18 +43,14 @@ useEffect(() => {
   fetchPlants();
 }, []);
   return (
-    <div>
-      <NavBar />
-      <HeroBanner />
-      <SearchComponent Plants={plants}/>
-      <FaqsComponent />
-      <Footer />
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow">
+        <NavBar />
+        <HeroBanner />
+        <SearchComponent Plants={plants}/>
+        <FaqsComponent />
+        <Footer />
+      </main>
     </div>
-    <>
-      <NavBar/>
-      <HeroBanner/>
-      <SearchComponent/>
-      <Footer/>
-    </>
   )
 }

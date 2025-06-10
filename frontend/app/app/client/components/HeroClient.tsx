@@ -1,4 +1,3 @@
-// components/HeroBanner.tsx
 import Image from "next/image";
 import React from "react";
 
@@ -12,16 +11,18 @@ export const HeroClient: React.FC<HeroBannerProps> = ({
   avatarUrl = "/avatar.png",
 }) => {
   return (
-    <div className="flex flex-col items-center text-center py-8 px-4">
+    <div className="flex flex-col items-center text-center py-10 px-6 sm:px-12">
       <Image
         src={avatarUrl}
         alt="User avatar"
-        width={80}
-        height={80}
+        width={96}
+        height={96}
         className="rounded-full"
       />
-      <h2 className="text-3xl font-bold text-[#899878] mt-4">Hi {userName}</h2>
-      <p className="max-w-2xl mt-2 text-sm text-gray-700">
+      <h2 className="text-4xl font-extrabold text-[#899878] mt-5">
+        Hi {userName}
+      </h2>
+      <p className="max-w-2xl mt-4 text-base sm:text-lg text-gray-700 leading-relaxed">
         random plant info random plant info random plant info random plant info random plant info random plant info
       </p>
     </div>

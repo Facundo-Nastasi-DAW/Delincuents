@@ -1,25 +1,25 @@
-// PlantCard.jsx
 import React from "react";
+
 interface Props {
-    name: string;
-    image: string;
-    isFav: boolean;
+  name: string;
+  image: string;
+  isFav: boolean;
 }
 
 const PlantCard = ({ name, image, isFav }: Props) => {
   return (
-    <div className="w-48 rounded-2xl shadow-md p-4 bg-[#f7f7e8] flex flex-col items-center justify-between">
+    <div className="w-64 rounded-2xl shadow-lg p-5 bg-[#f7f7e8] flex flex-col items-center justify-between">
       <div
-        className="w-40 h-40 rounded-xl mb-3"
+        className="w-56 h-56 rounded-xl mb-4"
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
-      <div className="w-full flex justify-between items-center px-1">
-        <span className="text-sm font-medium text-black">{name || "Plant Name"}</span>
-        <span className="text-xl">
+      <div className="w-full flex justify-between items-center px-2">
+        <span className="text-lg font-semibold text-black truncate">{name || "Plant Name"}</span>
+        <span className="text-2xl">
           {isFav ? "❤️" : "🖤"}
         </span>
       </div>
