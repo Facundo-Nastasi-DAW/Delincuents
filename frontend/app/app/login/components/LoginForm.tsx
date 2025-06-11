@@ -1,45 +1,50 @@
 "use client";
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 
 interface LoginFormSectionProps {
-  onSubmit?: (email: string, password: string) => void;
+  onSubmit?: (username: string, password: string) => void;
   onSwitch: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch }) => {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("http://localhost:8000/login", {
-        method: "POST",
-        credentials: "include", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          USERNAME: email,
-          PASSWORD: password,
-        }),
-      });
+  e.preventDefault();
+  try {
+    const res = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        USERNAME: userName,
+        PASSWORD: password,
+      }),
+    });
 
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.detail || "Login failed");
-        return;
-      }
-
+    if (!res.ok) {
       const data = await res.json();
-      alert(`Bienvenido/a, ${data.name}!`);
-      
-    } catch (err) {
-      console.error(err);
-      setError("Ha ocurrido un error al iniciar sesión.");
+      setError(data.detail || "Login failed");
+      return;
     }
-  };
+
+    const data = await res.json();
+
+    // Guardar token y username en cookies
+    Cookies.set("token", data.token, { path: "/" });
+    Cookies.set("username", data.name || data.username, { path: "/" });
+
+    alert(`Welcome, ${data.name || data.username}!`);
+  } catch (err) {
+    console.error(err);
+    setError("There was an error.");
+  }
+};
 
   return (
     <div className="md:w-1/2 flex flex-col justify-center items-center px-10 py-16">
@@ -49,10 +54,10 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
       >
         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
         <input
-          type="email"
+          type="text"
           className="w-full mb-4 p-2.5 border border-gray-300 rounded-xl"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
           required
         />
 
@@ -68,6 +73,7 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
         {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
         <button
+          onClick={onSubmit ? () => onSubmit(userName, password) : undefined}
           type="submit"
           className="w-full bg-black text-white py-2 rounded-xl hover:opacity-90 transition"
         >

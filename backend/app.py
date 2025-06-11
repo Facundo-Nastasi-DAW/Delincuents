@@ -57,8 +57,7 @@ def login(request: LoginRequest.LoginRequest):
     userData = userRepository.getUserById(userId)
     user = {
         "token": token,
-        "name": userData.get("name", userData["username"]),
-        "profile_picture": userData.get("profile_picture")
+        "name": userData.get("name", userData["username"])
     }
 
     return user
