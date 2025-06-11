@@ -16,26 +16,26 @@ export const SignUpForm: React.FC<SignUpFormSectionProps> = ({ onSwitch }) => {
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+
   if (password !== confirm) {
     setError("Passwords do not match.");
     return;
   }
-    try {
-      const res = await fetch("http://localhost:8000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        mode: "cors",
-        body: JSON.stringify({
-          USERNAME: username,
-          EMAIL: email,
-          PASSWORD: password,
-          NAME: name,
-        }),
-      });
-
+  try {
+    const res = await fetch("http://localhost:8000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify({
+        USERNAME: username,
+        EMAIL: email,
+        PASSWORD: password,
+        NAME: name,
+      }),
+    });
     if (!res.ok) {
       let errorMessage = "Error al registrar.";
 
@@ -47,18 +47,18 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         errorMessage = "Error al registrar. Por favor, intÃ©ntalo de nuevo.";
       }
 
-    const data = await res.json();
+      setError(errorMessage);
+      return;
+    }
 
-    Cookies.set("token", data.token, { path: "/" });
-    Cookies.set("username", data.name || data.username, { path: "/" });
+    setError("");
+    console.log("Usuario registrado correctamente.");
 
-    alert(`Succesful registration. Welcome, ${data.name || data.username}!`);
   } catch (err) {
     console.error(err);
-    setError("An unexpected error occurred while registering");
+    setError("Ha ocurrido un error inesperado al registrar.");
   }
 };
-
 
   return (
     <div className="md:w-1/2 flex flex-col justify-center items-center px-10 py-16">
