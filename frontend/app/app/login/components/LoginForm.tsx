@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import Cookies from "js-cookie";
 
 interface LoginFormSectionProps {
-  onSubmit?: (email: string, password: string) => void;
+  onSubmit?: (username: string, password: string) => void;
   onSwitch: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch }) => {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -17,12 +17,12 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
   try {
     const res = await fetch("http://localhost:8000/login", {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
+      mode: "cors",
       body: JSON.stringify({
-        USERNAME: email,
+        USERNAME: userName,
         PASSWORD: password,
       }),
     });
@@ -52,12 +52,12 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-sm p-6 rounded-xl shadow-md"
       >
-        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
         <input
-          type="email"
+          type="text"
           className="w-full mb-4 p-2.5 border border-gray-300 rounded-xl"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
           required
         />
 
@@ -73,7 +73,7 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
         {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
         <button
-          onClick={onSubmit ? () => onSubmit(email, password) : undefined}
+          onClick={onSubmit ? () => onSubmit(userName, password) : undefined}
           type="submit"
           className="w-full bg-black text-white py-2 rounded-xl hover:opacity-90 transition"
         >
