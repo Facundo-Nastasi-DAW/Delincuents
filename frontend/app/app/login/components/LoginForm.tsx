@@ -17,10 +17,10 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
   try {
     const res = await fetch("http://localhost:8000/login", {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
+      mode: "cors",
       body: JSON.stringify({
         USERNAME: userName,
         PASSWORD: password,
@@ -52,7 +52,7 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-sm p-6 rounded-xl shadow-md"
       >
-        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
         <input
           type="text"
           className="w-full mb-4 p-2.5 border border-gray-300 rounded-xl"
