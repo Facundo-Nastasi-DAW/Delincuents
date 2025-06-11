@@ -1,5 +1,11 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-export const PlantImage: React.FC<{ src: string; alt: string }> = ({ src, alt }) => (
-  <Image src={src} alt={alt} width={300} height={300} className="rounded-xl object-cover" />
+export const PlantImage = ({ src, alt }: { src: string; alt: string }) => (
+  <Image
+    src={src}
+    alt={alt}
+    width={400} // más ancho
+    height={400}
+    className="rounded-2xl object-cover shadow-lg"
+  />
 );
