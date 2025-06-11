@@ -36,10 +36,15 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         }),
       });
 
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.detail || "Error al registrar.");
-        return;
+    if (!res.ok) {
+      let errorMessage = "Error al registrar.";
+
+      try {
+        const text = await res.text();
+        const json = text ? JSON.parse(text) : {};
+        errorMessage = json.detail || errorMessage;
+      } catch {
+        errorMessage = "Error al registrar. Por favor, intÃ©ntalo de nuevo.";
       }
 
     const data = await res.json();

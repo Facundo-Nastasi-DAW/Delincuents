@@ -9,7 +9,7 @@ class DelincuentsRepository(object):
         self.db = pymysql.connect(host=env['DB_HOST'],
                                      user=env['DB_USER'],
                                      passwd=env['DB_PASSWORD'],
-                                     port=env['DB_PORT'],
+                                     port=int (env['DB_PORT']),
                                      db=env['DB_NAME'],
                                      charset='utf8mb4',
                                      autocommit=True,

@@ -4,7 +4,7 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     def existsUsername(self, username):
         self.connect()
         sql = "Select 1 from user where username = %s;"
-        self.cursor.execute(sql, (username))
+        self.cursor.execute(sql, (username,))
         result = self.cursor.fetchone()
         self.disconnect()
         return result
@@ -12,14 +12,14 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     def register(self, username, email, pwd, name):
         self.connect()
         sql = "INSERT INTO User (username, email, password, name) VALUES (%s, %s, %s, %s);"
-        self.cursor.execute(sql, (username, email, pwd, name))
+        self.cursor.execute(sql, (username, email, pwd, name,))
         self.disconnect()
         return
     
     def getPassword(self, username):
         self.connect()
         sql = "Select password from user where username = %s;"
-        self.cursor.execute(sql, (username))
+        self.cursor.execute(sql, (username,))
         result = self.cursor.fetchone()
         self.disconnect()
         return result
@@ -27,7 +27,7 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     def getId(self, username):
         self.connect()
         sql = "Select id from user where username = %s;"
-        self.cursor.execute(sql, (username))
+        self.cursor.execute(sql, (username,))
         result = self.cursor.fetchone()
         self.disconnect()
         return result
@@ -35,7 +35,7 @@ class UserRepository(DelincuentsRepository.DelincuentsRepository):
     def getUserById(self, id):
         self.connect()
         sql = "Select * from user where id = %s;"
-        self.cursor.execute(sql, (id))
+        self.cursor.execute(sql, (id,))
         result = self.cursor.fetchall()
         self.disconnect()
         return result

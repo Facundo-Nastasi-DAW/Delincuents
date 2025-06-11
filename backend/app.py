@@ -13,7 +13,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-userRepository = UserRepository.UserRepository
+userRepository = UserRepository.UserRepository()
+securityService = SecurityService()
 
 #End-point to registry
 @app.post('/register')
@@ -24,7 +25,7 @@ def register(request: RegisterRequest.RegisterRequest):
             detail="Username already exists"
         )
     
-    encryptedPwd = SecurityService.encrypy(request.PASSWORD)
+    encryptedPwd = securityService.encrypt(request.PASSWORD)
 
     userRepository.register(
         request.USERNAME,
@@ -32,8 +33,8 @@ def register(request: RegisterRequest.RegisterRequest):
         encryptedPwd,
         request.NAME
     )
-    loginRequest = LoginRequest(USERNAME=request.USERNAME, PASSWORD=request.PASSWORD)
-    return login(loginRequest)
+
+    return
 
 #End-point to login
 @app.post('/login')
@@ -45,14 +46,14 @@ def login(request: LoginRequest.LoginRequest):
         )
     
     storedPwd = userRepository.getPassword(request.USERNAME)
-    if not storedPwd == SecurityService.encrypt(request.PASSWORD):
+    if not storedPwd == securityService.encrypt(request.PASSWORD):
         raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Incorrect password"
             )
     
     userId = userRepository.getId(request.USERNAME)
-    token = SecurityService.create_access_token({"id": userId})
+    token = securityService.create_access_token({"id": userId})
     userData = userRepository.getUserById(userId)
     user = {
         "token": token,
