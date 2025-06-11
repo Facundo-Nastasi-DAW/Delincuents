@@ -75,7 +75,7 @@ export default function PlantDetailPage() {
           sun={plant.sun}
           temp={plant.temp}
         />
-        <CommentSection />
+        <CommentSection plantId={plant.id} />
       </main>
       <Footer />
     </div>

@@ -1,52 +1,23 @@
 "use client";
 
-import React, { JSX, useState } from "react";
+import React, { useState } from "react";
 import { Comment } from "./coments/Coment";
 import { CommentInput } from "./coments/ComentInput";
+import { allComments, CommentData } from "./coments/comments";
 
-export type CommentData = {
-  id: number;
-  parentId: number | null;
-  author: string;
-  content: string;
-  likes: number;
-  dislikes: number;
-};
+interface CommentSectionProps {
+  plantId: string;
+}
 
+export const CommentSection: React.FC<CommentSectionProps> = ({ plantId }) => {
+  const [comments, setComments] = useState<CommentData[]>(
+    allComments.filter((c) => c.plantId === plantId)
+  );
 
-const initialComments: CommentData[] = [
-  {
-    id: 1,
-    parentId: null,
-    author: "Laura",
-    content: "Esta planta necesita mucha luz?",
-    likes: 2,
-    dislikes: 0,
-  },
-  {
-    id: 2,
-    parentId: 1,
-    author: "Carlos",
-    content: "Yo la tengo en semisombra y va bien",
-    likes: 3,
-    dislikes: 0,
-  },
-  {
-    id: 3,
-    parentId: null,
-    author: "Ana",
-    content: "Cuántas veces la regáis?",
-    likes: 1,
-    dislikes: 1,
-  },
-];
-
-export const CommentSection: React.FC = () => {
-  const [comments, setComments] = useState<CommentData[]>(initialComments);
-
-  const handleAddComment = (content: string, parentId: number | null = null) => {
+  const handleAddComment = (content: string, parentId: string | null = null) => {
     const newComment: CommentData = {
-      id: Date.now(),
+      id: Date.now().toString(),
+      plantId,
       parentId,
       author: "Usuari",
       content,
@@ -56,41 +27,37 @@ export const CommentSection: React.FC = () => {
     setComments((prev) => [...prev, newComment]);
   };
 
-  const handleLike = (id: number) => {
+  const handleLike = (id: string) => {
     setComments((prev) =>
-      prev.map((comment) =>
-        comment.id === id ? { ...comment, likes: comment.likes + 1 } : comment
-      )
+      prev.map((c) => (c.id === id ? { ...c, likes: c.likes + 1 } : c))
     );
   };
 
-  const handleDislike = (id: number) => {
+  const handleDislike = (id: string) => {
     setComments((prev) =>
-      prev.map((comment) =>
-        comment.id === id ? { ...comment, dislikes: comment.dislikes + 1 } : comment
-      )
+      prev.map((c) => (c.id === id ? { ...c, dislikes: c.dislikes + 1 } : c))
     );
   };
 
-  const renderComments = (parentId: number | null = null): JSX.Element[] => {
+  const renderComments = (parentId: string | null = null) => {
     return comments
       .filter((c) => c.parentId === parentId)
-      .map((comment) => (
-        <div key={comment.id} className="ml-0 md:ml-4">
+      .map((c) => (
+        <div key={c.id} className="ml-0 md:ml-4 mt-2">
           <Comment
-                  comment={{ ...comment, text: comment.content }}
-                  onReply={handleAddComment}
-                  onLike={handleLike}
-                  onDislike={handleDislike} replies={[]}          />
-          <div className="ml-4">
-            {renderComments(comment.id)}
-          </div>
+            comment={{ ...c, id: Number(c.id), text: c.content }}
+            onReply={(text: string, parentId: number) => handleAddComment(text, parentId.toString())}
+            onLike={(id: number) => handleLike(id.toString())}
+            onDislike={(id: number) => handleDislike(id.toString())}
+            replies={[]} // si se usa
+          />
+          <div className="ml-4">{renderComments(c.id)}</div>
         </div>
       ));
   };
 
   return (
-    <div className="w-4/5 flex flex-col p-4">
+    <div className="w-full max-w-2xl mx-auto p-4">
       <h3 className="text-xl font-semibold mb-4">Comentaris</h3>
       {comments.length === 0 ? (
         <div className="text-center">
@@ -101,9 +68,7 @@ export const CommentSection: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="space-y-4">
-            {renderComments()}
-          </div>
+          <div className="space-y-4">{renderComments()}</div>
           <div className="mt-6">
             <CommentInput onSubmit={handleAddComment} />
           </div>
