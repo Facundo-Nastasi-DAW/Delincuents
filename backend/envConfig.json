@@ -1,6 +1,6 @@
 {
     "pp": {
-        "DB_HOST": "localhost",
+        "DB_HOST": "host.docker.internal",
         "DB_PORT": "3306",
         "DB_NAME": "delincuents_pp",
         "DB_USER": "root",
