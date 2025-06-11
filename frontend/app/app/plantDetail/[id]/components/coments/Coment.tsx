@@ -31,10 +31,12 @@ export const Comment: React.FC<Props> = ({
   const [showReply, setShowReply] = useState(false);
 
   return (
-    <div className="mb-4 pl-2">
-      <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-md shadow-sm">
-        <p className="text-gray-800 dark:text-white">{comment.text}</p>
-        <div className="flex items-center gap-4 mt-2">
+    <div className="mb-6 pl-2">
+      <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-sm">
+        <p className="text-lg text-gray-800 dark:text-white leading-relaxed">
+          {comment.text}
+        </p>
+        <div className="flex items-center gap-6 mt-4">
           <LikeDislike
             likes={comment.likes}
             dislikes={comment.dislikes}
@@ -42,14 +44,14 @@ export const Comment: React.FC<Props> = ({
             onDislike={() => onDislike(comment.id)}
           />
           <button
-            className="text-sm text-blue-600 hover:underline"
+            className="text-base text-blue-600 hover:underline"
             onClick={() => setShowReply(!showReply)}
           >
             {showReply ? "Cancel·lar" : "Respondre"}
           </button>
         </div>
         {showReply && (
-          <div className="mt-2">
+          <div className="mt-4">
             <CommentInput
               onSubmit={(text) => {
                 onReply(text, comment.id);
@@ -60,7 +62,7 @@ export const Comment: React.FC<Props> = ({
         )}
       </div>
 
-      <div className="ml-6 mt-2">
+      <div className="ml-6 mt-4">
         {replies.map((reply) => (
           <Comment
             key={reply.id}

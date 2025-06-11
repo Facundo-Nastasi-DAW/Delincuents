@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['plantasfaitful.com.ar'], // ¡aquí va el dominio sin https ni path!
+    domains: ['plantasfaitful.com.ar', 'perenual.com'], // añadimos perenual.com
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
 };
 
-export default nextConfig;
 module.exports = nextConfig;
