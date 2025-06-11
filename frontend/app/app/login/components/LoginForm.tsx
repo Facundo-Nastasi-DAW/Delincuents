@@ -40,6 +40,7 @@ export const LoginForm: React.FC<LoginFormSectionProps> = ({ onSubmit, onSwitch 
     Cookies.set("username", data.name || data.username, { path: "/" });
 
     alert(`Welcome, ${data.name || data.username}!`);
+    window.location.href = "/"; // 
   } catch (err) {
     console.error(err);
     setError("There was an error.");
