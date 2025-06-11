@@ -21,7 +21,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setError("Passwords do not match.");
     return;
   }
-
   try {
     const res = await fetch("http://localhost:8000/register", {
       method: "POST",
@@ -37,7 +36,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         NAME: name,
       }),
     });
-
     if (!res.ok) {
       let errorMessage = "Error al registrar.";
 
@@ -61,8 +59,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setError("Ha ocurrido un error inesperado al registrar.");
   }
 };
-
-
 
   return (
     <div className="md:w-1/2 flex flex-col justify-center items-center px-10 py-16">

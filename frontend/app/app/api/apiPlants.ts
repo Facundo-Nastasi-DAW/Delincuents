@@ -8,7 +8,8 @@ export async function getPlants() {
 };
 
 export async function getPlantById(id: string) {
-    return await fetch(`${baseUrl}/api/v2/species/details/${id}?key=${apiKey}`, {
-        method: 'GET'
-    });
-};
+  return await fetch(`${baseUrl}/api/v2/species/details/${id}?key=${apiKey}`, {
+    method: 'GET',
+    cache: 'no-store', 
+  });
+}

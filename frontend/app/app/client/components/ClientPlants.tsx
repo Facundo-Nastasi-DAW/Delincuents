@@ -11,6 +11,7 @@ interface Plant {
   default_image?: {
     regular_url?: string;
   };
+  id: string;
 }
 
 export const ClientPlants: React.FC<MyPlantsSectionProps> = ({ clientPlants }) => {

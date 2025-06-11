@@ -8,6 +8,7 @@ interface Plant {
   default_image?: {
     regular_url?: string;
   };
+  id: string
 }
 
 interface Props {
@@ -48,6 +49,7 @@ const PlantCarousel = ({ Plants }: Props) => {
         {Plants.map((plant, index) => (
           <PlantCard
             key={index}
+            id={plant.id}
             name={plant.common_name}
             image={plant.default_image?.regular_url || "https://via.placeholder.com/150"}
             isFav={plant.isFav}

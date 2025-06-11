@@ -15,16 +15,16 @@ export const CommentInput: React.FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <textarea
-        className="w-full p-2 border border-gray-300 rounded-md resize-none dark:bg-gray-700 dark:text-white"
-        rows={2}
+        className="w-full p-4 text-base rounded-lg border bg-white border-gray-300 resize-none dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#899878]"
+        rows={3}
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Escriu un comentari..."
       />
       <button
-        className="self-end bg-[#899878] text-white px-4 py-1 rounded hover:bg-[#E4E6C3] hover:text-black"
+        className="self-end bg-[#899878] text-white text-base font-medium px-6 py-2 rounded-lg hover:bg-[#E4E6C3] hover:text-black transition-colors duration-200"
         onClick={handleSend}
       >
         Enviar
